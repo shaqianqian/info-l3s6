@@ -1,0 +1,311 @@
+--------------------------------Q1------------------------------------------
+Inductive entier : Set :=
+    O : entier
+  | S : entier -> entier.
+
+Fixpoint plus (n m : entier) : entier :=
+  match n with
+  | O => S m
+  | S n' => S (plus n' m)
+  end.
+
+Theorem associativite:forall (n m p : entier) ,plus n (plus m p) = plus (plus n m) p.
+
+Proof.
+
+intros.
+
+induction n.
+
+reflexivity.
+
+simpl.
+
+rewrite IHn.
+
+reflexivity.
+
+Qed.
+
+
+
+--------------------------------Q2------------------------------------------
+
+Inductive entier : Type :=
+  | O : entier
+  | S : entier -> entier.
+
+
+Fixpoint plus (n m : entier) : entier :=
+  match n with
+    | O => m
+    | S n' => S (plus n' m)
+  end.
+
+
+Lemma plus0 (n : entier) : plus n O = n.
+Proof.
+unfold plus.
+induction n.
+
+reflexivity.
+simpl.
+rewrite  IHn.
+reflexivity.
+Qed.
+
+--------------------------------Q3------------------------------------------
+Lemma plusS (n p : entier) : plus n (S p) = S (plus n p).
+Proof.
+unfold plus.
+induction n.
+
+reflexivity.
+simpl.
+rewrite  IHn.
+reflexivity.
+Qed.
+
+
+
+--------------------------------Q4------------------------------------------
+
+Theorem associativite:forall (n m p : entier) ,plus n (plus m p) = plus (plus n m) p.
+
+Proof.
+
+intros.
+
+induction n.
+
+reflexivity.
+
+simpl.
+
+rewrite IHn.
+
+reflexivity.
+
+Qed.
+
+Theorem symetrie : forall(n m : entier),plus n m = plus m n.
+
+induction n.
+simpl.
+rewrite plus0.
+reflexivity.
+simpl.
+rewrite IHn.
+rewrite plusS.
+reflexivity.
+Show Proof.
+
+--------------------------------Q5------------------------------------------
+Lemma egalS (n m : nat) : n = m <-> S n = S m.
+Proof.
+split.
++intro a.
+ rewrite a.
+ reflexivity.
++intro a.
+ injection a.
+ intro b.
+ exact b.
+Show Proof.
+Qed.
+
+
+
+--------------------------------Q6------------------------------------------
+Theorem simplification (a n m : entier) : plus a n = plus a m <-> n = m.
+Proof.
+induction a.
+simpl.
+reflexivity.
+split.
+simpl.
+intro.
+apply IHa.
+rewrite egalS.
+exact H.
+intro.
+induction n.
+simpl.
+rewrite H.
+reflexivity.
+rewrite H.
+reflexivity.
+Show Proof.
+Qed.
+
+
+--------------------------------Q7------------------------------------------
+
+Fixpoint mult (n m : entier) : entier :=
+  match n with
+    | O => O
+    | S n' => plus m (mult n' m)
+  end.
+
+
+
+
+Lemma multO (n : entier) : mult n O = O.
+Proof.
+unfold mult.
+induction n.
+
+reflexivity.
+simpl.
+rewrite  IHn.
+reflexivity.
+Qed.
+
+
+
+——Q8
+Lemma assoc2:forall (n m p : entier) ,plus n (plus m p) = plus m (plus n p).
+
+
+Proof.
+
+intros.
+
+induction n.
+
+reflexivity.
+
+simpl.
+
+rewrite IHn.
+rewrite plusS.
+reflexivity.
+
+
+Qed.
+
+
+—Q9
+Lemma multsn (n m : entier) : mult n (S m) = plus n (mult n m).
+Proof.
+induction n.
+simpl.
+reflexivity.
+simpl.
+rewrite IHn.
+rewrite assoc2.
+reflexivity.
+Show Proof.
+Qed.
+
+—Q10
+
+Theorem symetriemult (n m : entier) : mult n m = mult m n.
+Proof.
+induction n.
+simpl.
+rewrite multO.
+reflexivity.
+simpl.
+rewrite IHn.
+rewrite multsn.
+reflexivity.
+Show Proof.
+Qed.
+
+
+—Q12
+Theorem associativitemult (n m p : entier) : mult n (mult m p) = mult (mult n m) p.
+Proof.
+induction n.
+simpl.
+reflexivity.
+simpl.
+rewrite IHn.
+rewrite distributivite.
+reflexivity.
+Qed.
+
+
+——Q13
+Fixpoint longueur (l : liste) : nat :=
+   match l with
+     | nil => 0
+     | C _ ls => S(longueur ls)
+   end.
+
+—Q14
+Theorem simplification (a n m : entier) : plus a n = plus a m <-> n = m.
+Proof.
+induction a.
+simpl.
+reflexivity.
+split.
+simpl.
+intro.
+apply IHa.
+rewrite egalS.
+exact H.
+intro.
+induction n.
+simpl.
+rewrite H.
+reflexivity.
+rewrite H.
+reflexivity.
+Show Proof.
+Qed.
+
+——---------------------------------Q14-----------------------
+Inductive liste : Type :=
+ | nil : liste
+ | C : nat -> liste -> liste.
+
+Fixpoint concat (l1 l2 : liste) : liste :=
+   match (l1,l2) with
+     | (nil,ls) => ls
+     | (C n1 ls1,ls2) => C n1 (concat ls1 ls2)
+   end.
+
+Compute concat nil nil.
+Compute concat nil (C 1 nil).
+Compute concat (C 1 nil) (C 5 nil).
+
+
+——-----------------------------Q15-----------------------------
+Theorem long (l m : liste) : longueur(concat l m) = longueur l + longueur m.
+Proof.
+induction l.
+simpl.
+reflexivity.
+simpl.
+rewrite IHl.
+reflexivity.
+Show Proof.
+Qed.
+
+(*Q16*)
+
+Fixpoint ajoutqueue (n : nat)(l : liste):liste :=
+   match l with
+     | nil => C n nil
+     | C x lx => C x (ajoutqueue n lx)
+   end.
+
+Compute ajoutqueue 1 nil.
+Compute ajoutqueue 5 (C 1 nil).
+
+
+(*Q17*)
+
+Theorem lgajout (x : nat) (l : liste) : longueur(ajoutqueue x l) = 1 + longueur l.
+Proof.
+induction l.
+simpl.
+reflexivity.
+simpl.
+rewrite IHl.
+simpl.
+reflexivity.
+Show Proof.
+Qed

@@ -1,0 +1,580 @@
+{\rtf1\ansi\ansicpg936\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c20000\c20000\c20000;\cssrgb\c100000\c100000\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Question 1\
+Lemma hilbertS (A B C :Prop) :\
+  (A -> B -> C) -> (A -> B)-> A-> C.\
+Proof.\
+intros abc ab a.\
+apply abc.\
+exact a.\
+apply ab.\
+exact a.\
+Qed.\
+\
+\
+Question 2\
+Lemma q2(A B :Prop) :\
+  A ->(B -> A).\
+Proof.\
+intros a ba.\
+exact a.\
+Qed.\
+\
+\
+Question 3\
+Lemma q3(A B:Prop) : \
+  A -> (~A -> B).\
+Proof.\
+intros a na.\
+destruct na.\
+exact a.\
+Qed.\
+\
+\
+Question 4\
+Lemma q4 (A B C : Prop) : \
+(A -> B) -> ((B -> C) -> (A -> C)).\
+Proof.\
+intros ab bc a.\
+apply bc.\
+apply ab.\
+exact a.\
+Qed.\
+\
+Question 5\
+Lemma q5(A B:Prop) :\
+(A -> B) -> (~B -> ~A).\
+Proof.\
+intros ab nb a.\
+destruct nb.\
+apply ab.\
+exact a.\
+Qed.\
+\
+Question 6\
+Lemma tiersexclus (A:Prop) : \
+~~(A \\/ ~ A).\
+Proof.\
+intros f.\
+apply f.\
+right.\
+intros a.\
+apply f.\
+left.\
+exact a.\
+Qed.\
+\
+\
+Question 7\
+Require Import Classical.\
+Lemma bottom_c(A :Prop) :\
+  ((~A) -> False) -> A.\
+Proof.\
+intros f.\
+apply NNPP.\
+intros na.\
+destruct f.\
+exact na.\
+Qed.\
+\
+   Question 8\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trcbpat3 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clmgf \clvertalt \clshdrawnil \clwWidth3723\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx4320
+\clmrg \clvertalt \clshdrawnil \clwWidth3723\clftsWidth3 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadl200 \clpadr200 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\partightenfactor0
+\cf2 \expnd0\expndtw0\kerning0
+Lemma q8(A B: Prop) :\
+  (~B -> ~A) -> ( A ->B).\
+Proof.\
+intros nbna a.\
+apply bottom_c.\
+intros nb.\
+apply nbna.\
+exact nb.\
+exact a.\
+Qed.\cf0 \kerning1\expnd0\expndtw0 \cell 
+\pard\intbl\itap1\cell \lastrow\row
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+Question 9\
+Require Import Classical.\
+Lemma bottom_c(A :Prop) :\
+  ((~A) -> False) -> A.\
+Proof.\
+intros a.\
+apply NNPP.\
+intros na .\
+destruct a.\
+exact na.\
+Qed.\
+\
+\
+Lemma q9( A :Prop) :\
+~~A -> A.\
+intros na.\
+apply bottom_c.\
+intros nna .\
+destruct na.\
+exact nna.\
+Qed.\
+Lemma q9( A :Prop) :\
+A -> ~~A.\
+Proof.\
+intros a na.\
+destruct na.\
+exact a.\
+Qed.\
+\
+Question 10\
+Lemma q10( A :Prop) :\
+  A /\\~A -> False.\
+Proof.\
+intros ana .\
+destruct ana as[a na].\
+destruct na.\
+exact a .\
+Qed.\
+\
+Lemma q10( A :Prop) :\
+False -> A /\\ ~A. \
+Proof.\
+intros f .\
+destruct f.\
+Qed.\
+\
+ou\
+Lemma q10 (A : Prop) : \
+(A /\\ ~A) <-> False.\
+Proof.\
+split.\
+intros ana .\
+apply ana.\
+destruct ana as[a na].\
+destruct na.\
+exact a .\
+\
+intros f  .\
+destruct f.\
+Qed.\
+\
+\
+Question 11\
+Lemma exo13 (A :Prop) :\
+~A <-> (A -> False).\
+Proof.\
+split.\
+\
+intros af na. \
+apply af.\
+exact na.\
+\
+intros af na.\
+destruct af.\
+exact na.\
+Qed.\
+\
+Lemma q13( P Q :Prop) :\
+  (A <-> B) <-> ( A -> B) /\\ ( Q -> B).\
+\
+  Proof.\
+split.\
+intros ab.\
+  split.\
+ intros ada.\
+   \
+  apply ab.\
+\
+  exact adb.\
+\
+  intros agb.\
+   \
+  apply ab.\
+\
+  exact agb.\
+\
+intros abba.\
+  split.\
+ intros ab.\
+   \
+  apply abba.\
+\
+  exact ab.\
+\
+  intros ab.\
+   \
+  apply abba.\
+\
+  exact ab.  \
+\
+\
+Qed.\
+\
+Question 14\
+Lemma q14 (A B C : Prop) :  (A /\\ B -> C) <-> (A -> B -> C).\
+Proof.\
+split.\
+intros f a b .\
+apply f.\
+split.\
+exact a.\
+exact b.\
+\
+intros abc ab .\
+apply abc.\
+apply ab.\
+destruct ab as[a b].\
+exact b.\
+\
+Qed.\
+\
+\
+\
+Question 15\
+Lemma q15 (A B C : Prop) :  (C -> A)\\/ (C -> B) <-> (C -> A \\/ B).\
+Proof.\
+split.\
+intros caocb c.\
+destruct caocb as [ca | cb].\
+  left.\
+  apply ca.\
+  exact c.\
+  right.\
+  apply cb.\
+  exact c.\
+\
+intros cab .\
+left.\
+\
+intros c.\
+destruct cab as [a | b].\
+\
+apply c.\
+apply a.\
+\
+Question 16\
+Lemma q16 (X : Type) (A B : X -> Prop) :\
+  ((forall x, A x) \\/ (forall x, B x)) -> forall x, A x \\/ B x.\
+Proof.\
+intros f x.\
+destruct f as [a|b].\
+left.\
+apply a.\
+right.\
+apply b.\
+Qed.\
+\
+\
+Question 17\
+Lemma q17 (X : Type) (A B : X -> Prop) :\
+  (exists x, A x /\\ B x) -> ((exists x, A x) /\\ (exists x, B x)).\
+Proof.\
+intros f .\
+destruct f as [ax bx].\
+split.\
+exists ax.\
+destruct bx as [a b].\
+exact a.\
+\
+exists ax.\
+destruct bx as [a b].\
+exact b.\
+Qed.\
+\
+  Require Import Classical.\
+Lemma bottom_c(A :Prop) :\
+  ((~A) -> False) -> A.\
+Proof.\
+intros a.\
+apply NNPP.\
+intros na .\
+destruct a.\
+exact na.\
+Qed.\
+\
+Question 18\
+Lemma q18 (A B:Prop) :\
+  ~(A /\\ B) -> (~A \\/ ~B).\
+Proof.\
+intros f.\
+apply bottom_c.\
+intros nf.\
+destruct f.\
+split .\
+apply bottom_c.\
+intros na.\
+apply nf.\
+left.\
+apply na.\
+apply bottom_c.\
+intros nb.\
+apply nf.\
+right.\
+apply nb.\
+Qed.\
+\
+Question 19\
+Lemma q19 (X : Type) : forall (x1 x2 : X), x1 = x2 -> x2 = x1.\
+Proof.\
+intros f x fx.\
+rewrite <- fx.\
+reflexivity.\
+Qed.\
+\
+Question 20\
+Lemma exemple_140(X:Type) :\
+  forall (x1 x2 x3:X),x1 = x2 /\\ x2 = x3 -> x1 = x3.\
+Proof.\
+intros x1 x2 x3 y.\
+destruct y as [a b].\
+rewrite <- b.\
+rewrite <- a.\
+reflexivity.\
+Qed.\
+\
+Question 21\
+Definition faux := forall (P : Prop), P.\
+Lemma bottom_e (A : Prop) : faux -> A.\
+intros f .\
+apply f.\
+Qed.\
+\
+\
+Q22.1\
+Definition faux := forall (P : Prop), P.\
+Definition non (A : Prop) :=\
+  forall (P : Prop), (A -> faux -> P) -> P.\
+Lemma non_intro (A : Prop) : A -> faux -> non A.\
+Proof.\
+intros a f .\
+apply f.\
+Qed.\
+\
+\
+Q22.2\
+Require Import Classical.\
+Lemma bottom_c(A :Prop) :\
+  ((~A) -> False) -> A.\
+Proof.\
+intros f.\
+apply NNPP.\
+intros na.\
+destruct f.\
+exact na.\
+Qed.\
+\
+Definition faux := forall (P : Prop), P.\
+Definition non (A : Prop) :=\
+  forall (P : Prop), (A -> faux -> P) -> P.\
+Lemma non_intro (A : Prop) : A -> faux -> non A.\
+Proof.\
+intros a f.\
+apply bottom_c.\
+apply f.\
+Qed.\
+\
+\
+Q23.1\
+Definition et (A B : Prop) :=\
+  forall (P : Prop), (A -> B -> P) -> P.\
+Lemma et_intro (A B : Prop) : A -> B -> et A B.\
+Proof.\
+intros a b .\
+unfold et.\
+intros x y.\
+apply y.\
+apply a.\
+apply b.\
+Qed.\
+\
+Q23.2\
+Definition et (A B : Prop) :=\
+  forall (P : Prop), (A -> B -> P) -> P.\
+\
+\
+Lemma et_elim_g (A B : Prop) : et A B -> A.\
+Proof.\
+unfold et.\
+intros f  .\
+apply f.\
+intros a b.\
+apply a.\
+Qed.\
+\
+Q23.3\
+Definition et (A B : Prop) :=\
+  forall (P : Prop), (A -> B -> P) -> P.\
+Lemma et_elim_d (A B : Prop) : et A B -> B.\
+Proof.\
+unfold et.\
+intros f  .\
+apply f.\
+intros a b.\
+apply b.\
+Qed.\
+\
+\
+Q24\
+Definition ou (A B : Prop) :=\
+  forall (P : Prop), ((A -> P) -> (B -> P) -> P).\
+Lemma ou_intro_g (A B : Prop) : A -> ou A B.\
+\
+Proof.\
+intros a.\
+unfold ou.\
+intros x y z.\
+apply y.\
+apply a.\
+Qed.\
+\
+Lemma ou_intro_d (A B : Prop) : B -> ou A B.\
+\
+Proof.\
+intros b.\
+unfold ou.\
+intros x y z.\
+apply z.\
+apply b.\
+Qed.\
+\
+Lemma ou_elim (A B C : Prop) : ou A B -> (A -> C) -> (B -> C) -> C.\
+Proof.\
+unfold ou.\
+intros x y z.\
+apply x.\
+apply y.\
+apply z.\
+Qed.\
+\
+\
+Question 25\
+\
+Definition existe (A : Type) (P : A -> Prop) :=\
+  forall (Q : Prop), (forall a, P a -> Q) -> Q.\
+Lemma existe_elim (A : Type) (P : A -> Prop) (Q : Prop) :\
+  existe A P -> (forall x : A, P x -> Q) -> Q.\
+Proof.\
+unfold existe.\
+intros x y    .\
+\
+apply x.\
+apply y.\
+Qed.\
+\
+\
+Question 26\
+Definition faux := forall (P : Prop), P.\
+Lemma faux_false : faux <-> False.\
+Proof .\
+split.\
+unfold faux.\
+intro f .\
+apply f.\
+intro h .\
+destruct h.\
+Qed.\
+\
+\
+Question 28\
+Definition et (A B : Prop) :=\
+  forall (P : Prop), (A -> B -> P) -> P.\
+\
+Lemma et_and (A B : Prop) : et A B <-> A /\\ B.\
+Proof.\
+unfold et.\
+split.\
+intros a .\
+apply a.\
+intros c b.\
+split.\
+exact c.\
+exact b.\
+intros a b c .\
+apply c.\
+destruct a as [x y].\
+exact x.\
+destruct a as [x y].\
+exact y.\
+Qed.\
+\
+\
+Question 29\
+Definition ou (A B : Prop) :=\
+  forall (P : Prop), ((A -> P) -> (B -> P) -> P).\
+\
+\
+Lemma ou_or (A B : Prop) : ou A B <-> A \\/ B.\
+Proof.\
+unfold ou.\
+split.\
+intros a  .\
+apply a.\
+intros x.\
+left.\
+exact x.\
+intros y.\
+right.\
+exact y.\
+intros g k h z.\
+destruct g as [w|o].\
+apply h.\
+exact w.\
+apply z.\
+exact o.\
+Qed.\
+\
+Question 30\
+Definition existe (A : Type) (P : A -> Prop) :=\
+  forall (Q : Prop), (forall a, P a -> Q) -> Q.\
+\
+Lemma existe_elim (A : Type) (P : A -> Prop) (Q : Prop) :\
+  existe A P -> (forall x : A, P x -> Q) -> Q.\
+Proof.\
+unfold existe.\
+intros x y    .\
+\
+apply x.\
+apply y.\
+Qed.\
+Lemma existe_exists (A : Type) (P : A -> Prop) : existe A P <-> exists a, P a.\
+Proof.\
+unfold existe.\
+split.\
+\
+intros s .\
+apply s.\
+\
+intros f g.\
+exists f.\
+exact g.\
+\
+\
+intros s g h.\
+destruct s.\
+\
+Question 31\
+Definition egal (A : Type) (a a' : A) :=\
+  forall (P : A -> Prop), P a -> P a'.\
+Lemma egal_eq (A : Type) (a a' : A) : egal _ a a' <-> a = a'.\
+Proof.\
+unfold egal.\
+split.\
+intros k.\
+apply k.\
+reflexivity.\
+\
+intros k g h .\
+rewrite <-k.\
+exact h.\
+\
+Qed.\
+\
+\
+\
+\
+}

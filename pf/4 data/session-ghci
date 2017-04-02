@@ -1,0 +1,326 @@
+GHCi, version 8.0.1: http://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/hym/c/ghci
+Prelude> :l typesalgébriques.hs 
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> :type ex1
+ex1 :: Paire Float -> Paire Float
+*TypesAlgébriques> :type bougeAGauche 
+bougeAGauche :: Point -> Point
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+
+typesalgébriques.hs:32:1: error:
+    Cycle in type synonym declarations:
+      typesalgébriques.hs:32:1-27: type Tree a = (a, [Tree a])
+Failed, modules loaded: none.
+Prelude> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> Vrai
+
+<interactive>:6:1: error:
+    • No instance for (Show Bool') arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print it
+*TypesAlgébriques> :type Vrai
+Vrai :: Bool'
+*TypesAlgébriques> duplique
+
+<interactive>:8:1: error:
+    • No instance for (Show (a0 -> Paire a0))
+        arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+*TypesAlgébriques> :type show
+show :: Show a => a -> String
+*TypesAlgébriques> show 123
+"123"
+*TypesAlgébriques> :i Show
+class Show a where
+  showsPrec :: Int -> a -> ShowS
+  show :: a -> String
+  showList :: [a] -> ShowS
+  {-# MINIMAL showsPrec | show #-}
+  	-- Defined in ‘GHC.Show’
+instance Show a => Show [a] -- Defined in ‘GHC.Show’
+instance Show Word -- Defined in ‘GHC.Show’
+instance Show Ordering -- Defined in ‘GHC.Show’
+instance Show a => Show (Maybe a) -- Defined in ‘GHC.Show’
+instance Show Integer -- Defined in ‘GHC.Show’
+instance Show Int -- Defined in ‘GHC.Show’
+instance Show Char -- Defined in ‘GHC.Show’
+instance Show Bool -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j, Show k, Show l, Show m, Show n, Show o) =>
+         Show (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j, Show k, Show l, Show m, Show n) =>
+         Show (a, b, c, d, e, f, g, h, i, j, k, l, m, n)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j, Show k, Show l, Show m) =>
+         Show (a, b, c, d, e, f, g, h, i, j, k, l, m)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j, Show k, Show l) =>
+         Show (a, b, c, d, e, f, g, h, i, j, k, l)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j, Show k) =>
+         Show (a, b, c, d, e, f, g, h, i, j, k)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i, Show j) =>
+         Show (a, b, c, d, e, f, g, h, i, j)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h, Show i) =>
+         Show (a, b, c, d, e, f, g, h, i)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f, Show g,
+          Show h) =>
+         Show (a, b, c, d, e, f, g, h)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f,
+          Show g) =>
+         Show (a, b, c, d, e, f, g)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e, Show f) =>
+         Show (a, b, c, d, e, f)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d, Show e) =>
+         Show (a, b, c, d, e)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c, Show d) => Show (a, b, c, d)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b, Show c) => Show (a, b, c)
+  -- Defined in ‘GHC.Show’
+instance (Show a, Show b) => Show (a, b) -- Defined in ‘GHC.Show’
+instance Show () -- Defined in ‘GHC.Show’
+instance (Show a, Show b) => Show (Either a b)
+  -- Defined in ‘Data.Either’
+instance Show Float -- Defined in ‘GHC.Float’
+instance Show Double -- Defined in ‘GHC.Float’
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> Vrai
+Vrai
+*TypesAlgébriques> show Vrai
+"Vrai"
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> show Vrai
+"Vrai"
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> show Vrai
+
+<interactive>:18:1: error:
+    • No instance for (Show Bool') arising from a use of ‘show’
+    • In the expression: show Vrai
+      In an equation for ‘it’: it = show Vrai
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> :info Bool'
+data Bool' = Vrai | Faux 	-- Defined at typesalgébriques.hs:37:1
+instance [safe] Show Bool' -- Defined at typesalgébriques.hs:39:14
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> :type Paire
+Paire :: Int -> Int -> TupleEntiers
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex2
+Paire 12 34
+*TypesAlgébriques> :info TupleEntiers 
+data TupleEntiers = Paire Int Int | Triplet Int Int Int
+  	-- Defined at typesalgébriques.hs:59:1
+instance [safe] Show TupleEntiers
+  -- Defined at typesalgébriques.hs:61:14
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> Paire 12 34 == Paire 12 34
+
+<interactive>:27:1: error:
+    • No instance for (Eq TupleEntiers) arising from a use of ‘==’
+    • In the expression: Paire 12 34 == Paire 12 34
+      In an equation for ‘it’: it = Paire 12 34 == Paire 12 34
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> Paire 12 34 == Paire 12 34
+True
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> Paire 12 34 < Paire 12 34
+False
+*TypesAlgébriques> Paire 12 34 < Paire 12 35
+True
+*TypesAlgébriques> Paire 12 34 < Paire 12 33
+False
+*TypesAlgébriques> Paire 12 34 == Paire 34 12
+False
+*TypesAlgébriques> Paire 12 34 > Paire 13 33
+False
+*TypesAlgébriques> Paire 12 34 < Paire 13 33
+True
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> commenceParA' "auie"
+False
+*TypesAlgébriques> commenceParA' "Auie"
+True
+*TypesAlgébriques> commenceParA' ""
+*** Exception: Prelude.head: empty list
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> commenceParA'' ""
+*** Exception: Prelude.head: empty list
+*TypesAlgébriques> :type null
+null :: Foldable t => t a -> Bool
+*TypesAlgébriques> null []
+True
+*TypesAlgébriques> null [1]
+False
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> commenceParA' ""
+False
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> commenceParA''' ""
+False
+*TypesAlgébriques> commenceParA''' "A"
+True
+*TypesAlgébriques> commenceParA''' "Aauie"
+True
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex8
+Cons 34 (Cons 12 Vide)
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> 12 :- Vide'
+12 :- Vide'
+*TypesAlgébriques> 12 :- 34 :- Vide'
+
+<interactive>:59:1: error:
+    • Non type-variable argument in the constraint: Num (Liste' a)
+      (Use FlexibleContexts to permit this)
+    • When checking the inferred type
+        it :: forall a. (Num (Liste' a), Num a) => Liste' (Liste' a)
+*TypesAlgébriques> 12 :- 34 :- 56 :- Vide'
+
+<interactive>:60:1: error:
+    • Non type-variable argument
+        in the constraint: Num (Liste' (Liste' a))
+      (Use FlexibleContexts to permit this)
+    • When checking the inferred type
+        it :: forall a.
+              (Num (Liste' (Liste' a)), Num (Liste' a), Num a) =>
+              Liste' (Liste' (Liste' a))
+*TypesAlgébriques> :info (:-)
+data Liste' a = ... | a :- (Liste' a)
+  	-- Defined at typesalgébriques.hs:130:17
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex11
+12 :- (34 :- (56 :- Vide'))
+*TypesAlgébriques> ex10
+12 :- (34 :- (56 :- Vide'))
+*TypesAlgébriques> :info (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+  	-- Defined in ‘GHC.Num’
+infixl 6 +
+*TypesAlgébriques> :R
+unknown command ':R'
+use :? for help.
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex12
+46 :- Vide'
+*TypesAlgébriques> :info (:)
+data [] a = ... | a : [a] 	-- Defined in ‘GHC.Types’
+infixr 5 :
+*TypesAlgébriques> :info (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+  	-- Defined in ‘GHC.Num’
+infixl 6 +
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+
+typesalgébriques.hs:146:15: error:
+    • Couldn't match expected type ‘Integer’
+                  with actual type ‘Liste' Integer’
+    • In the second argument of ‘(+++)’, namely ‘34 :- Vide'’
+      In the expression: 12 +++ 34 :- Vide'
+      In an equation for ‘ex13’: ex13 = 12 +++ 34 :- Vide'
+Failed, modules loaded: none.
+Prelude> :info (:)
+data [] a = ... | a : [a] 	-- Defined in ‘GHC.Types’
+infixr 5 :
+Prelude> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex15
+Noeud 34 [Noeud 12 [],Noeud 12 [],Noeud 12 []]
+*TypesAlgébriques> ex16
+Noeud 56 [Noeud 12 [],Noeud 34 [Noeud 12 [],No^Cud 12 [Interrupted.
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex18
+
+<interactive>:79:1: error:
+    • No instance for (Show (Arbre' Integer))
+        arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print it
+*TypesAlgébriques> :R
+unknown command ':R'
+use :? for help.
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex18
+Noeud' {valeur = 34, fils = []}
+*TypesAlgébriques> ex19
+Noeud' {valeur = 56, fils = [Noeud' {valeur = 34, fils = []}]}
+*TypesAlgébriques> :r
+[1 of 1] Compiling TypesAlgébriques ( typesalgébriques.hs, interpreted )
+Ok, modules loaded: TypesAlgébriques.
+*TypesAlgébriques> ex19
+Noeud' {valeur = 56, fils = [Noeud' {valeur = 34, fils = []}]}
+*TypesAlgébriques> ex20
+Noeud' {valeur = 56, fils = [Noeud' {valeur = 12, fils = []},Noeud' {valeur = 12, fils = []}]}
+*TypesAlgébriques> :type valeur
+valeur :: Arbre' a -> a
+*TypesAlgébriques> :type fils
+fils :: Arbre' a -> [Arbre' a]
+*TypesAlgébriques> fils ex20
+[Noeud' {valeur = 12, fils = []},Noeud' {valeur = 12, fils = []}]
+*TypesAlgébriques> valeur ex20
+56
